@@ -327,6 +327,64 @@
 
 
     <script src="weeding.js"></script>
+    <!-- Dans le head -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Votre script normal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialiser Supabase
+            const supabaseUrl = 'https://tydcmzvlmctoksrqvyyq.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5ZGNtenZsbWN0b2tzcnF2eXlxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk1ODA5MjYsImV4cCI6MjA3NTE1NjkyNn0.x-d-lpEJlLq8viSm3OZu2fLbx04QH4anbYr2zBCuYj0';
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+            // Gestion du formulaire
+            document.getElementById('send').addEventListener('click', async function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const message = document.getElementById('message').value;
+                const participants = document.getElementById('participants').value;
+                const resultElement = document.getElementById('result');
+
+                if (!name || !message) {
+                    resultElement.textContent = 'Vui lòng điền đầy đủ thông tin.';
+                    resultElement.style.color = '#dc3545';
+                    return;
+                }
+
+                try {
+                    const { data, error } = await supabase
+                        .from('invitee')
+                        .insert([
+                            {
+                                name: name,
+                                message: message,
+                                participants: parseInt(participants) || 1
+                            }
+                        ])
+                        .select();
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    resultElement.textContent = `Cảm ơn ${name}! Lời chúc của bạn đã được gửi thành công.`;
+                    resultElement.style.color = '#28a745';
+
+                    // Réinitialiser le formulaire
+                    document.getElementById('name').value = '';
+                    document.getElementById('message').value = '';
+                    document.getElementById('participants').value = '';
+
+                } catch (error) {
+                    console.error('Erreur:', error);
+                    resultElement.textContent = 'Erreur: ' + error.message;
+                    resultElement.style.color = '#dc3545';
+                }
+            });
+        });
+    </script>
 
 </body>
 

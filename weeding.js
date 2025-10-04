@@ -1,27 +1,3 @@
-const sendBtn = document.getElementById("send");
-    const result = document.getElementById("result");
-
-    sendBtn.addEventListener("click", async () => {
-      const name = document.getElementById("name").value.trim();
-      const message = document.getElementById("message").value.trim();
-      const participants = document.getElementById("participants").value;
-
-      if(!name || !message || !participants){
-        result.textContent = "⚠️ Tous les champs sont requis";
-        return;
-      }
-
-      const res = await fetch("http://localhost:3000/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, message, participants })
-      });
-
-      const text = await res.text();
-      result.textContent = text;
-    });
-
-        // weeding.js
 
 // Configuration des images de fond pour la section bride-gallery
 const galleryBackgrounds = [
