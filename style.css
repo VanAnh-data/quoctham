@@ -258,19 +258,6 @@ section {
     50% { text-shadow: 2px 2px 8px rgba(183, 110, 121, 0.3); }
 }
 
-.couple-promise {
-    margin-bottom: 50px;
-}
-
-.couple-promise p {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    color: var(--secondary-color);
-    font-style: italic;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0 20px;
-}
 
 /* Save the Date */
 .save-the-date {
