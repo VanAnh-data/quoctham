@@ -131,50 +131,82 @@ document.addEventListener('DOMContentLoaded', function () {
 const floatingBtn = document.getElementById('floatingMusicBtn');
 const backgroundMusic = document.getElementById('backgroundMusic');
 
-// Configuration initiale - musique active
-let isPlaying = true;
-backgroundMusic.volume = 0.3; // Volume à 30%
+let isPlaying = false;
+backgroundMusic.volume = 0.3; // Volume initial à 30%
 
-// Lecture automatique avec gestion d'erreur
-document.addEventListener('DOMContentLoaded', function () {
-    backgroundMusic.play().then(() => {
-        console.log("Musique démarrée automatiquement");
+// Fonction pour mettre à jour le bouton selon l'état
+function updateButton() {
+    if (isPlaying) {
         floatingBtn.innerHTML = '⏸<span class="music-tooltip">Tạm dừng nhạc</span>';
         floatingBtn.style.background = '#a44d4d';
-    }).catch(error => {
-        console.log("Lecture auto bloquée, nécessite une interaction utilisateur");
+        floatingBtn.style.animation = 'pulse 2s infinite';
+    } else {
         floatingBtn.innerHTML = '▶<span class="music-tooltip">Bật nhạc</span>';
         floatingBtn.style.background = 'var(--primary-color)';
         floatingBtn.style.animation = 'none';
-        isPlaying = false;
+    }
+}
+
+// Fonction de lecture de la musique
+function playMusic() {
+    backgroundMusic.play().then(() => {
+        isPlaying = true;
+        updateButton();
+        console.log("Musique démarrée !");
+    }).catch(err => {
+        console.log("Impossible de démarrer la musique :", err);
+    });
+}
+
+// Tentative de lecture auto au chargement (bloquée sur certains navigateurs)
+document.addEventListener('DOMContentLoaded', () => {
+    backgroundMusic.play().then(() => {
+        isPlaying = true;
+        updateButton();
+    }).catch(() => {
+        console.log("Lecture auto bloquée, en attente d'interaction utilisateur...");
+        updateButton();
     });
 });
 
-// Gestion du clic sur le bouton
+// ➕ Démarrage automatique dès la première interaction (clic, touche ou touch mobile)
+['click', 'keydown', 'touchstart'].forEach(eventName => {
+    document.addEventListener(eventName, function startMusicOnce() {
+        if (!isPlaying) {
+            playMusic();
+        }
+        // Supprime les écouteurs après la première activation
+        ['click', 'keydown', 'touchstart'].forEach(e => {
+            document.removeEventListener(e, startMusicOnce);
+        });
+    });
+});
+
+// Gestion manuelle via le bouton flottant
 floatingBtn.addEventListener('click', function () {
     if (isPlaying) {
         backgroundMusic.pause();
-        floatingBtn.innerHTML = '▶<span class="music-tooltip">Bật nhạc</span>';
-        floatingBtn.style.background = 'var(--primary-color)';
-        floatingBtn.style.animation = 'none';
+        isPlaying = false;
     } else {
-        backgroundMusic.play().then(() => {
-            floatingBtn.innerHTML = '⏸<span class="music-tooltip">Tạm dừng nhạc</span>';
-            floatingBtn.style.background = '#a44d4d';
-            floatingBtn.style.animation = 'pulse 2s infinite';
-        }).catch(error => {
-            console.log("Impossible de démarrer la musique");
-        });
+        playMusic();
     }
-    isPlaying = !isPlaying;
+    updateButton();
 });
 
+// Réduction automatique du volume après 30 secondes
+setTimeout(() => {
+    if (isPlaying) {
+        backgroundMusic.volume = 0.2;
+    }
+}, 30000);
 // Réduction automatique du volume après 30 secondes
 setTimeout(() => {
     if (isPlaying) {
         backgroundMusic.volume = 0.2; // Réduit à 20% après 30s
     }
 }, 30000);
+
+
 
 // Bouton pour afficher les QR codes
 const showQRBtn = document.getElementById('showQRBtn');
