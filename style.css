@@ -36,69 +36,72 @@ html {
 }
 
 .hero {
-    min-height: 100vh; /* Au lieu de 80vh */
+    min-height: 100vh;
+    min-height: 100dvh; /* Nouvelle unité pour mobile */
     display: flex;
     align-items: center;
     justify-content: center;
     background-image: url('anhnen.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Effet parallaxe */
+    background-repeat: no-repeat;
     position: relative;
     color: white;
     text-align: center;
     overflow: hidden;
 }
 
+/* Supprimer background-attachment: fixed pour mobile */
+@media (min-width: 768px) {
+    .hero {
+        background-attachment: fixed;
+    }
+}
+
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    }
+}
 
 .hero h1 {
-    font-size: clamp(3rem, 10vw, 6rem); /* Beaucoup plus grand */
+    font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 700;
     text-align: center;
     color: var(--primary-color);
     position: relative;
     font-family: 'Dancing Script', cursive;
     margin: 0;
-    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
-    animation: fadeInDown 1.5s ease forwards;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
     line-height: 1.1;
-    letter-spacing: 2px;
+    padding: 0 20px;
 }
 
-/* Animation d'entrée améliorée */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-100px);
+/* Correction spécifique pour les petits écrans */
+@media (max-width: 400px) and (max-height: 700px) {
+    .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-position: center 30%; /* Ajuste la position verticale */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .hero h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+        margin-top: -20px; /* Remonte légèrement le texte */
     }
 }
 
-/* Effet de brillance sur le texte */
-.hero h1::after {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-    border-radius: 10px;
-    z-index: -1;
-    animation: shine 3s ease-in-out infinite;
-}
-
-@keyframes shine {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
+/* Pour les très petits écrans comme iPhone SE */
+@media (max-width: 375px) and (max-height: 667px) {
+    .hero {
+        background-size: cover;
+        background-position: center center;
+    }
+    
+    .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1;
+    }
 }
 
 /* Optionnel : Ajouter une flèche pour indiquer de scroller */
