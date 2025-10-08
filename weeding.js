@@ -1,15 +1,64 @@
 
 // Configuration des images de fond pour la section bride-gallery
+/*LCA01330.jpeg
+- LCA01392.jpeg
+- LCA01398.jpeg
+- LCA01418.jpeg
+- LCA01427.jpeg
+- LCA01434.jpeg
+- LCA01439.jpeg
+- LCA01458.jpeg
+- LCA01529.jpeg
+- LCA01535.jpeg
+- LCA01543.jpeg
+- LCA01559.jpeg
+- LCA01569.jpeg
+- LCA01573.jpeg
+- LCA01585.jpeg
+- LCA01590.jpeg
+- LCA01598.jpeg
+- LCA01742 .png
+- LCA01748.jpeg
+- LCA01933.jpeg
+- LCA01975.jpeg
+- LCA02033.jpeg
+- LCA02080.jpeg
+- LCA02089.jpeg
+- LCA02171.jpeg
+- LCA02186.jpeg
+- LCA02252.jpeg
+- LCA02253.jpeg
+- LCA02302.jpeg*/
 const galleryBackgrounds = [
-    'image/LCA01333.JPG',
-    'image/LCA01220.JPG', 
-    'image/LCA01394.JPG',
-    'image/LCA02092.JPG',
-    'image/LCA01800.JPG',
-    'image/LCA01315.JPG',
-    'image/LCA02068.JPG',
-    'image/LCA02236.JPG',
-    'image/LCA02047.JPG'
+    'image/ANH/LCA01330.jpeg',
+    'image/ANH/LCA01392.jpeg',
+    'image/ANH/LCA01398.jpeg',
+    'image/ANH/LCA01418.jpeg',
+    'image/ANH/LCA01427.jpeg',
+    'image/ANH/LCA01434.jpeg',
+    'image/ANH/LCA01439.jpeg',
+    'image/ANH/LCA01458.jpeg',
+    'image/ANH/LCA01529.jpeg',
+    'image/ANH/LCA01535.jpeg',
+    'image/ANH/LCA01543.jpeg',
+    'image/ANH/LCA01559.jpeg',
+    'image/ANH/LCA01569.jpeg',
+    'image/ANH/LCA01573.jpeg',
+    'image/ANH/LCA01585.jpeg',
+    'image/ANH/LCA01590.jpeg',
+    'image/ANH/LCA01598.jpeg',
+    'image/ANH/LCA01742.png',
+    'image/ANH/LCA01748.jpeg',
+    'image/ANH/LCA01933.jpeg',
+    'image/ANH/LCA01975.jpeg',
+    'image/ANH/LCA02033.jpeg',
+    'image/ANH/LCA02080.jpeg',
+    'image/ANH/LCA02089.jpeg',
+    'image/ANH/LCA02171.jpeg',
+    'image/ANH/LCA02186.jpeg',
+    'image/ANH/LCA02252.jpeg',
+    'image/ANH/LCA02253.jpeg',
+    'image/ANH/LCA02302.jpeg'
 ];
 
 let currentGalleryBackgroundIndex = 0;
